@@ -1,3 +1,4 @@
+// Console Log Guard - Initial v1.0.0 Release
 const core = require('@actions/core');
 const { scan } = require('./scanner');
 

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node tests/run-tests.js",
     "build": "ncc build src/index.js -o dist",
-    "all": "npm test && npm run build"
+    "all": "npm test && npm run build",
+    "publish-act": "node scripts/publish.js"
   },
   "author": "Console Log Guard",
   "license": "ISC",

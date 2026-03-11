@@ -39,6 +39,23 @@ The project includes a comprehensive test suite in the `tests/` directory coveri
 2. Run the test suite: `npm test`
 3. Build the action: `npm run build`
 
+## Automated Publishing 📦
+
+You can use the built-in automation script to handle the git workflow:
+
+```bash
+npm run publish-act
+```
+
+This script will:
+1. Run all tests and build the project.
+2. Prompt you for a new version number.
+3. Update `package.json`.
+4. Create a git commit and a tagged release.
+5. Push everything to GitHub.
+
+After running this, simply go to your GitHub repo's **Releases** page and publish the Marketplace draft.
+
 ## License
 ISC
 
