@@ -1,6 +1,10 @@
-# Console Log Guard 🚀
+# Console Log Guard - Zero Logs in Production 🚀
 
-Console Log Guard is a high-performance GitHub Action designed to enforce MNC-level code quality. It acts as a gatekeeper in your CI/CD pipeline, automatically scanning Pull Requests to detect and block forgotten `console.log` statements before they reach production.
+**Console Log Guard** is a high-performance GitHub Action designed to enforce MNC-level code quality. It acts as a gatekeeper in your CI/CD pipeline, automatically scanning Pull Requests to detect and block forgotten `console.log` statements before they reach production.
+
+> [!TIP]
+> 🚀 **Want to Auto-Fix?** Our upcoming **Pro Version** will automatically remove logs and push clean commits for you! [Register your interest here](https://github.com/vallarasuk/console-log-guard/issues/new?title=Interested+in+Pro+Version).
+
 
 ## Features
 - **Fast**: Recursively scans directories in seconds.

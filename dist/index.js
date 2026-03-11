@@ -27611,6 +27611,7 @@ module.exports = { scan };
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
+// Console Log Guard - Initial v1.0.0 Release
 const core = __nccwpck_require__(7484);
 const { scan } = __nccwpck_require__(9114);
 
