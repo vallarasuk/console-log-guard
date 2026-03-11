@@ -60,6 +60,12 @@ This script will:
 
 After running this, simply go to your GitHub repo's **Releases** page and publish the Marketplace draft.
 
+## Support & Sponsorship 💖
+
+If this action saved you time or caught a sneaky bug before production, consider supporting the development! You can scan the QR code below to send a direct tip via UPI (GPay, PhonePe, Paytm).
+
+<img src="upi-qr-pay.png" alt="UPI QR Code" width="250"/>
+
 ## License
 ISC
 
