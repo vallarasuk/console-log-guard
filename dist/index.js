@@ -27514,6 +27514,62 @@ function parseParams (str) {
 module.exports = parseParams
 
 
+/***/ }),
+
+/***/ 9114:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const fs = __nccwpck_require__(9896);
+const path = __nccwpck_require__(6928);
+
+/**
+ * Scans a directory for console.log statements.
+ * @param {string} dir Directory to scan
+ * @param {Object} options Options
+ * @param {string[]} options.extensions Extensions to scan
+ * @param {Function} options.onError Callback for when a log is found
+ * @returns {boolean} True if logs were found
+ */
+function scan(dir, { extensions, onError }) {
+  let logsFound = false;
+
+  function scanDirectory(currentDir) {
+    const files = fs.readdirSync(currentDir);
+    files.forEach(file => {
+      const filePath = path.join(currentDir, file);
+      if (fs.statSync(filePath).isDirectory()) {
+        if (file !== 'node_modules' && file !== '.git' && file !== 'dist') {
+          scanDirectory(filePath);
+        }
+      } else if (extensions.includes(path.extname(file))) {
+        const content = fs.readFileSync(filePath, 'utf8');
+        
+        // Refined Logic (Regex-based):
+        // 1. Remove block comments
+        // 2. Remove line comments
+        // 3. Remove strings/template literals
+        // 4. Look for console.log
+        
+        // This is a simplified approach using regex to strip noise before checking
+        const strippedContent = content
+          .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '') // Strip comments
+          .replace(/(['"`])(?:\\.|(?!\1)[^\\\n])*\1/g, '');    // Strip strings
+          
+        if (/\bconsole\.log\s*\(/.test(strippedContent)) {
+          if (onError) onError(filePath);
+          logsFound = true;
+        }
+      }
+    });
+  }
+
+  scanDirectory(dir);
+  return logsFound;
+}
+
+module.exports = { scan };
+
+
 /***/ })
 
 /******/ 	});
@@ -27556,37 +27612,17 @@ module.exports = parseParams
 /************************************************************************/
 var __webpack_exports__ = {};
 const core = __nccwpck_require__(7484);
-const fs = __nccwpck_require__(9896);
-const path = __nccwpck_require__(6928);
+const { scan } = __nccwpck_require__(9114);
 
 async function run() {
   try {
     const targetDir = core.getInput('directory') || '.';
     const extensions = ['.js', '.ts', '.jsx', '.tsx'];
-    let logsFound = false;
-
-    // Logic: Recursively find and scan files
-    function scanDirectory(dir) {
-      const files = fs.readdirSync(dir);
-      files.forEach(file => {
-        const filePath = path.join(dir, file);
-        if (fs.statSync(filePath).isDirectory()) {
-          if (file !== 'node_modules' && file !== '.git' && file !== 'dist') scanDirectory(filePath);
-        } else if (extensions.includes(path.extname(file))) {
-          const content = fs.readFileSync(filePath, 'utf8');
-          // Regex: Look for console.log( but ensure it's not preceded by // on the same line
-          // This is a basic check; for complex cases, a proper parser would be better,
-          // but this matches the "Regex" requirement.
-          const logRegex = /^(?!\s*\/\/).*\bconsole\.log\(/gm;
-          if (logRegex.test(content)) {
-            core.error(`❌ console.log found in: ${filePath}`);
-            logsFound = true;
-          }
-        }
-      });
-    }
-
-    scanDirectory(targetDir);
+    
+    const logsFound = scan(targetDir, {
+      extensions,
+      onError: (filePath) => core.error(`❌ console.log found in: ${filePath}`)
+    });
 
     if (logsFound) {
       core.setFailed('Production code must be clean. Please remove console.log statements.');

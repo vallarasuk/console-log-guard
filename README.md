@@ -25,7 +25,20 @@ steps:
 
 | Input | Description | Default |
 |-------|-------------|---------|
-| `directory` | The directory to scan for console.log statements | `.` |
+## Development & Testing
+
+### Test Cases
+The project includes a comprehensive test suite in the `tests/` directory covering various scenarios:
+- **fail-active.js**: Detects standard console logs.
+- **pass-line-comment.js**: Ignores logs in `//` comments.
+- **pass-block-comment.js**: Ignores logs in `/* */` comments.
+- **pass-strings.js**: Ignores logs inside string literals and regex.
+
+### Steps to Run Tests
+1. Install dependencies: `npm install`
+2. Run the test suite: `npm test`
+3. Build the action: `npm run build`
 
 ## License
 ISC
+
