@@ -1,0 +1,14 @@
+name: 'Console Log Guard'
+description: 'Detect and block console.log statements in your code.'
+author: 'Console Log Guard'
+inputs:
+  directory:
+    description: 'The directory to scan for console.log statements'
+    required: false
+    default: '.'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'shield'
+  color: 'green'
