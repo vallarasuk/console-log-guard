@@ -1,24 +1,16 @@
 {
   "name": "console-log-guard",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "High-performance GitHub Action to detect and block console.log statements.",
+  "main": "dist/index.js",
   "scripts": {
+    "test": "node tests/run-tests.js",
     "build": "ncc build src/index.js -o dist",
-    "test": "node tests/run-tests.js"
+    "all": "npm test && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://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@github.com/vallarasuk/console-log-guard.git"
-  },
-  "keywords": [],
-  "author": "",
+  "author": "Console Log Guard",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/vallarasuk/console-log-guard/issues"
-  },
-  "homepage": "https://github.com/vallarasuk/console-log-guard#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^9.0.0"
