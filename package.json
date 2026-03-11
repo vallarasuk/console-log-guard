@@ -9,7 +9,17 @@
     "all": "npm test && npm run build",
     "publish-act": "node scripts/publish.js"
   },
+  "keywords": [
+    "GitHub Action",
+    "Code Quality",
+    "JavaScript",
+    "TypeScript",
+    "Clean Code",
+    "console.log",
+    "CI/CD"
+  ],
   "author": "Console Log Guard",
+
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
